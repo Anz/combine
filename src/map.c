@@ -45,3 +45,12 @@ void* map_get(void* map, char* key) {
     }
     return NULL;
 }
+
+char** map_keys(void* map) {
+    char** keys = array_init();
+    for (int i = 0; i < array_count(map); i++) {
+        entry_t* entry = ((entry_t**)map)[i];
+        keys = array_add(keys, entry->key);
+    }
+    return keys;
+}
