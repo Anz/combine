@@ -6,6 +6,7 @@
 #include "array.h"
 #include "map.h"
 #include "texture_loader.h"
+#include "scene.h"
 
 int main(int argc, char* argv[]) {
     printf("hello combine\n");
@@ -22,7 +23,12 @@ int main(int argc, char* argv[]) {
     // init render
     render_init();
 
+    // load all textures
     void* textures = textures_load("img");
+
+    // scene
+    scene_t scene;
+    scene_init(&scene);
 
     sprite_t draft;
     sprite_init(&draft, map_get(textures, "draft"));
@@ -30,9 +36,8 @@ int main(int argc, char* argv[]) {
     sprite_t crap;
     sprite_init(&crap, map_get(textures, "crap"));
 
-    sprite_t** sprites = array_init();
-    sprites = array_add(sprites, &crap);
-    sprites = array_add(sprites, &draft);
+    scene.space = array_add(scene.space, &crap);
+    scene.space = array_add(scene.space, &draft);
 
     // main
     while (running) {
@@ -43,7 +48,7 @@ int main(int argc, char* argv[]) {
         }
 
         if (running) {
-            render(sprites);
+            render(&scene);
             SDL_GL_SwapBuffers();
         }
         draft.y += 0.5f;
@@ -51,6 +56,7 @@ int main(int argc, char* argv[]) {
     }
 
     // clean up
+    scene_release(&scene);
     textures_release(textures);
     SDL_Quit();
 

@@ -21,7 +21,7 @@ void render_init() {
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
-void render(sprite_t** sprites) {
+void render(scene_t* scene) {
     glClearDepth(0.0f);
     glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -34,10 +34,10 @@ void render(sprite_t** sprites) {
 
     glPushMatrix();
 
-    for (int i = 0; i < array_count(sprites); i++) {
+    for (int i = 0; i < array_count(scene->space); i++) {
         glPopMatrix();
         glPushMatrix();
-        sprite_t* sprite = sprites[i];
+        sprite_t* sprite = scene->space[i];
 
         // translate
         glTranslatef(sprite->x, sprite->y, -sprite->layer);
