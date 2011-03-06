@@ -5,7 +5,7 @@
 #include "texture.h"
 
 typedef struct sprite {
-    GLfloat x, y, layer;
+    GLfloat x, y, rotation, layer;
     GLuint vertices;
     GLuint indices;
     texture_t* texture;

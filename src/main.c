@@ -53,10 +53,10 @@ int main(int argc, char* argv[]) {
             render(&scene);
             SDL_GL_SwapBuffers();
         }
-        draft.y += 0.5f;
+        draft.rotation += 0.5f;
         crap.x += 0.5f;
 
-        counter += 0.05f;
+        //counter += 0.05f;
         scene.camera.x = sin(counter) * 20.0f;
         scene.camera.y = cos(counter) * 20.0f;
     }

@@ -41,6 +41,7 @@ void render(scene_t* scene) {
 
         // translate
         glTranslatef(sprite->x - scene->camera.x, sprite->y - scene->camera.y, -sprite->layer);
+        glRotatef(sprite->rotation, 0.0f, 0.0f, -1.0f);
 
         // draw
         glBindBuffer(GL_ARRAY_BUFFER, sprite->vertices);

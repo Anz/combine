@@ -4,6 +4,7 @@
 void sprite_init(sprite_t* sprite, texture_t* texture) {
     sprite->x = 0.0f;
     sprite->y = 0.0f;
+    sprite->rotation = 0.0f;
     sprite->layer = 1.0f;
 
     GLfloat width = texture->width / 2.0f;
