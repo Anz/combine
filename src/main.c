@@ -24,15 +24,15 @@ int main(int argc, char* argv[]) {
 
     void* textures = textures_load("img");
 
-    sprite_t sprite;
-    sprite_init(&sprite, map_get(textures, "draft"));
+    sprite_t draft;
+    sprite_init(&draft, map_get(textures, "draft"));
 
-    sprite_t sprite3;
-    sprite_init(&sprite3, map_get(textures, "crap"));
+    sprite_t crap;
+    sprite_init(&crap, map_get(textures, "crap"));
 
     sprite_t** sprites = array_init();
-    sprites = array_add(sprites, &sprite3);
-    sprites = array_add(sprites, &sprite);
+    sprites = array_add(sprites, &crap);
+    sprites = array_add(sprites, &draft);
 
     // main
     while (running) {
@@ -46,6 +46,8 @@ int main(int argc, char* argv[]) {
             render(sprites);
             SDL_GL_SwapBuffers();
         }
+        draft.y += 0.5f;
+        crap.x += 0.5f;
     }
 
     // clean up

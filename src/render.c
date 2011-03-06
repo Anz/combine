@@ -32,9 +32,15 @@ void render(sprite_t** sprites) {
     glOrtho(-width, width, -height, height, 0,100);
     glMatrixMode(GL_MODELVIEW);
 
+    glPushMatrix();
 
     for (int i = 0; i < array_count(sprites); i++) {
+        glPopMatrix();
+        glPushMatrix();
         sprite_t* sprite = sprites[i];
+
+        // translate
+        glTranslatef(sprite->x, sprite->y, -sprite->layer);
 
         // draw
         glBindBuffer(GL_ARRAY_BUFFER, sprite->vertices);
@@ -44,5 +50,7 @@ void render(sprite_t** sprites) {
         glTexCoordPointer(2, GL_FLOAT, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     }
+    
+    glPopMatrix();
 }
 
