@@ -61,6 +61,7 @@ int main(int argc, char* argv[]) {
             SDL_GL_SwapBuffers();
         }
         draft.rotation += 0.5f;
+        draft.transparency = sin(counter) / 2.0f + 0.5f;
         crap.x += 0.5f;
 
         counter += 0.05f;

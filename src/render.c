@@ -44,6 +44,7 @@ void render(scene_t* scene) {
         glRotatef(sprite->rotation, 0.0f, 0.0f, -1.0f);
 
         // draw
+        glColor4f(1.0f, 1.0f, 1.0f, sprite->transparency);
         glBindBuffer(GL_ARRAY_BUFFER, sprite->vertices);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, sprite->indices);
         glBindTexture(GL_TEXTURE_2D, sprite->texture->image);
@@ -66,6 +67,7 @@ void render(scene_t* scene) {
         glRotatef(sprite->rotation, 0.0f, 0.0f, -1.0f);
 
         // draw
+        glColor4f(1.0f, 1.0f, 1.0f, sprite->transparency);
         glBindBuffer(GL_ARRAY_BUFFER, sprite->vertices);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, sprite->indices);
         glBindTexture(GL_TEXTURE_2D, sprite->texture->image);
