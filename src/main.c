@@ -36,8 +36,15 @@ int main(int argc, char* argv[]) {
     sprite_t crap;
     sprite_init(&crap, map_get(textures, "crap"));
 
+    sprite_t hud;
+    sprite_init(&hud, map_get(textures, "draft"));
+    hud.x = - 480.0f / 2.0f;
+    hud.y = 360.0f / 2.0f;
+
     scene.space = array_add(scene.space, &crap);
     scene.space = array_add(scene.space, &draft);
+
+    scene.hud = array_add(scene.hud, &hud);
 
     float counter = 0;
 
@@ -56,7 +63,7 @@ int main(int argc, char* argv[]) {
         draft.rotation += 0.5f;
         crap.x += 0.5f;
 
-        //counter += 0.05f;
+        counter += 0.05f;
         scene.camera.x = sin(counter) * 20.0f;
         scene.camera.y = cos(counter) * 20.0f;
     }

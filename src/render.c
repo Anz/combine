@@ -19,11 +19,11 @@ void render_init() {
     glClientActiveTexture(GL_TEXTURE0);
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glClearDepth(0.0f);
+    glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
 }
 
 void render(scene_t* scene) {
-    glClearDepth(0.0f);
-    glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     GLint width = 640 / 2;
     GLint height = 480 / 2;
@@ -53,5 +53,28 @@ void render(scene_t* scene) {
     }
     
     glPopMatrix();
+
+    glPushMatrix();
+
+    for (int i = 0; i < array_count(scene->hud); i++) {
+        glPopMatrix();
+        glPushMatrix();
+        sprite_t* sprite = scene->hud[i];
+
+        // translate
+        glTranslatef(sprite->x, sprite->y, -sprite->layer);
+        glRotatef(sprite->rotation, 0.0f, 0.0f, -1.0f);
+
+        // draw
+        glBindBuffer(GL_ARRAY_BUFFER, sprite->vertices);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, sprite->indices);
+        glBindTexture(GL_TEXTURE_2D, sprite->texture->image);
+        glVertexPointer(3, GL_FLOAT, 5 * sizeof(GLfloat), 0);
+        glTexCoordPointer(2, GL_FLOAT, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    }
+    
+    glPopMatrix();
+
 }
 
