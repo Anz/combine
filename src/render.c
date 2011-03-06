@@ -40,7 +40,7 @@ void render(scene_t* scene) {
         sprite_t* sprite = scene->space[i];
 
         // translate
-        glTranslatef(sprite->x, sprite->y, -sprite->layer);
+        glTranslatef(sprite->x - scene->camera.x, sprite->y - scene->camera.y, -sprite->layer);
 
         // draw
         glBindBuffer(GL_ARRAY_BUFFER, sprite->vertices);

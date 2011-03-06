@@ -2,6 +2,8 @@
 #include "array.h"
 
 void scene_init(scene_t* scene) {
+    scene->camera.x = 0.0f;
+    scene->camera.y = 0.0f;
     scene->space = array_init();
     scene->hud = array_init();
 }

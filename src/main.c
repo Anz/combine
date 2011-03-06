@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <dirent.h>
+#include <math.h>
 #include <SDL/SDL.h>
 #include "render.h"
 #include "array.h"
@@ -39,6 +39,8 @@ int main(int argc, char* argv[]) {
     scene.space = array_add(scene.space, &crap);
     scene.space = array_add(scene.space, &draft);
 
+    float counter = 0;
+
     // main
     while (running) {
         while (SDL_PollEvent(&event)) {
@@ -53,6 +55,10 @@ int main(int argc, char* argv[]) {
         }
         draft.y += 0.5f;
         crap.x += 0.5f;
+
+        counter += 0.05f;
+        scene.camera.x = sin(counter) * 20.0f;
+        scene.camera.y = cos(counter) * 20.0f;
     }
 
     // clean up
