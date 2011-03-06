@@ -6,16 +6,13 @@ void sprite_init(sprite_t* sprite, texture_t* texture) {
     sprite->y = 0.0f;
     sprite->rotation = 0.0f;
     sprite->layer = 1.0f;
-
-    GLfloat width = texture->width / 2.0f;
-    GLfloat height = texture->height / 2.0f;
     sprite->texture = texture;
 
     GLfloat vertices_data[] = {
-        -1.0f * width, -1.0f * height, 0.0f, 0.0f, 0.0f,
-         1.0f * width, -1.0f * height, 0.0f, 1.0f, 0.0f,
-         1.0f * width,  1.0f * height, 0.0f, 1.0f, 1.0f,
-        -1.0f * width,  1.0f * height, 0.0f, 0.0f, 1.0f
+        -0.5f * texture->width, -0.5f * texture->height, 0.0f, 0.0f, 0.0f,
+         0.5f * texture->width, -0.5f * texture->height, 0.0f, 1.0f, 0.0f,
+         0.5f * texture->width,  0.5f * texture->height, 0.0f, 1.0f, 1.0f,
+        -0.5f * texture->width,  0.5f * texture->height, 0.0f, 0.0f, 1.0f
     };
 
     GLuint indices_data[] = {
