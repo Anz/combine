@@ -19,12 +19,11 @@ void render_init() {
     glClientActiveTexture(GL_TEXTURE0);
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glClearDepth(0.0f);
     glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
 }
 
 void render(scene_t* scene) {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
     GLint width = 640 / 2;
     GLint height = 480 / 2;
     glMatrixMode(GL_PROJECTION);
