@@ -30,6 +30,7 @@ void* textures_load(char* path) {
         }
         
     }
+    chdir("..");
 
     return map;
 }

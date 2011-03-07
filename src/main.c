@@ -46,6 +46,8 @@ int main(int argc, char* argv[]) {
 
     scene.hud = array_add(scene.hud, &hud);
 
+    level_load(&scene, textures, "cave.lvl");
+
     float counter = 0;
 
     // main
@@ -65,7 +67,8 @@ int main(int argc, char* argv[]) {
         crap.x += 0.5f;
 
         counter += 0.05f;
-        scene.camera.x = sin(counter) * 20.0f;
+        //scene.camera.x = sin(counter) * 20.0f;
+        scene.camera.x = counter * 50.0f;
         scene.camera.y = cos(counter) * 20.0f;
     }
 
