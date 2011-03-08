@@ -32,9 +32,11 @@ int main(int argc, char* argv[]) {
 
     sprite_t draft;
     sprite_init(&draft, map_get(textures, "draft"));
+    draft.layer = 60;
 
     sprite_t crap;
     sprite_init(&crap, map_get(textures, "crap"));
+    crap.layer = 50;
 
     sprite_t hud;
     sprite_init(&hud, map_get(textures, "draft"));
@@ -65,10 +67,11 @@ int main(int argc, char* argv[]) {
         draft.rotation += 0.5f;
         draft.transparency = sin(counter) / 2.0f + 0.5f;
         crap.x += 0.5f;
+        crap.layer = (sin(counter) * 0.5f + 0.5f) * 65.0f;
 
         counter += 0.05f;
         //scene.camera.x = sin(counter) * 20.0f;
-        scene.camera.x = counter * 50.0f;
+        scene.camera.x = counter * 10.0f;
         scene.camera.y = cos(counter) * 20.0f;
     }
 

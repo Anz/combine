@@ -3,6 +3,13 @@
 #include <IL/il.h>
 #include "array.h"
 
+bool compare_layer(void* a, void* b) {
+    sprite_t* sa = a;
+    sprite_t* sb = b;
+
+    return sa->layer > sb->layer;
+}
+
 void render_init() {
     // glew
     glewInit();
@@ -33,13 +40,15 @@ void render(scene_t* scene) {
 
     glPushMatrix();
 
+    array_sort(scene->space, &compare_layer);
+
     for (int i = 0; i < array_count(scene->space); i++) {
         glPopMatrix();
         glPushMatrix();
         sprite_t* sprite = scene->space[i];
 
         // translate
-        glTranslatef(sprite->x - scene->camera.x, sprite->y - scene->camera.y, -sprite->layer);
+        glTranslatef(sprite->x - scene->camera.x, sprite->y - scene->camera.y, sprite->layer - 100);
         glRotatef(sprite->rotation, 0.0f, 0.0f, -1.0f);
 
         // draw
@@ -56,13 +65,15 @@ void render(scene_t* scene) {
 
     glPushMatrix();
 
+    array_sort(scene->hud, &compare_layer);
+
     for (int i = 0; i < array_count(scene->hud); i++) {
         glPopMatrix();
         glPushMatrix();
         sprite_t* sprite = scene->hud[i];
 
         // translate
-        glTranslatef(sprite->x, sprite->y, -sprite->layer);
+        glTranslatef(sprite->x, sprite->y, sprite->layer -100);
         glRotatef(sprite->rotation, 0.0f, 0.0f, -1.0f);
 
         // draw

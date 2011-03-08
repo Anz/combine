@@ -48,3 +48,45 @@ int array_count(void* array) {
 void array_release(void* array) {
     free(get_origin_addr(array));
 }
+
+void array_swap(void* array, int a, int b) {
+    int** rarray = array;
+    int* tmp = rarray[a];
+    rarray[a] = rarray[b];
+    rarray[b] = tmp;
+}
+
+void array_sort(void* array, bool (*compare)(void*, void*)) {
+    int count = array_count(array);
+    int** rarray = array;
+
+    /*bool unsorted = true;
+
+    while (unsorted) {
+        unsorted = false;
+
+        void* first = rarray[0];
+        for (int i = 1; i < count; i++) {
+            void* element = rarray[i];
+
+            if (compare(first, element)) {
+                array_swap(array, 0, i);
+                unsorted = true;
+                break;
+            }
+        }
+    }*/
+
+    for (int i = 0; i < count; i++) {
+        void* smallest = rarray[i];
+
+        for (int j = i; j < count; j++) {
+            void* tocompare = rarray[j];
+            if (compare(smallest, tocompare)) {
+                array_swap(array, i, j);
+                smallest = tocompare;
+            }
+        }
+    }
+
+}
