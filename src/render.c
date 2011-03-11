@@ -51,14 +51,10 @@ void render(scene_t* scene) {
         glMatrixMode(GL_TEXTURE);
         glLoadIdentity();
         int frame_per_line = texture->width / sprite->width;
-        GLfloat twfactor = 1.0f / texture->width;
-        GLfloat thfactor = 1.0f / texture->height;
-        GLfloat texx = (sprite->width * (((sprite->frame - 1) % frame_per_line))) * twfactor;
-        GLfloat texy = (texture->height - sprite->height * ((sprite->frame - 1) / frame_per_line + 1)) * thfactor;
+        int frame = sprite->frame - 1;
+        GLfloat texx = (float)(sprite->width * (frame % frame_per_line)) / (float)texture->width;
+        GLfloat texy = 1.0f - ((sprite->height * (frame / frame_per_line + 1)) / (float)texture->height);
         glTranslatef(texx, texy, 0.0f);
-
-
-        printf("frame %i/%i (%.3f, %.3f)\n", sprite->frame, frame_per_line, texx, texy);
 
         // translate
         glMatrixMode(GL_MODELVIEW);

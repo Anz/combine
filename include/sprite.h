@@ -7,8 +7,8 @@
 typedef struct sprite {
     GLfloat x;
     GLfloat y;
-    GLfloat width;
-    GLfloat height;
+    int width;
+    int height;
     int frame;
     GLfloat rotation;
     GLfloat layer;

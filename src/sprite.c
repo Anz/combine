@@ -8,7 +8,7 @@ void sprite_ani_init(sprite_t* sprite, int width, int height, texture_t* texture
     sprite->x = 0.0f;
     sprite->y = 0.0f;
     sprite->width = width;
-    sprite->height = width;
+    sprite->height = height;
     sprite->frame = 1;
     sprite->rotation = 0.0f;
     sprite->layer = 1.0f;
