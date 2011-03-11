@@ -29,7 +29,7 @@ void render_init() {
     glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
 }
 
-void render(scene_t* scene) {
+void render(scene_t* scene, camera_t* camera) {
     glClear(GL_COLOR_BUFFER_BIT);
     GLint width = 640 / 2;
     GLint height = 480 / 2;
@@ -59,7 +59,7 @@ void render(scene_t* scene) {
         // translate
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        glTranslatef(sprite->x - scene->camera.x, sprite->y - scene->camera.y, sprite->layer - 100);
+        glTranslatef(sprite->x - camera->x, sprite->y - camera->y, sprite->layer - 100);
         glRotatef(sprite->rotation, 0.0f, 0.0f, -1.0f);
 
 

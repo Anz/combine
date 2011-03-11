@@ -3,12 +3,7 @@
 
 #include "sprite.h"
 
-typedef struct camera {
-    GLfloat x, y;
-} camera_t;
-
 typedef struct scene {
-    camera_t camera;
     sprite_t** space;
     sprite_t** hud;
 } scene_t;

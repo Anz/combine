@@ -1,5 +1,5 @@
 #ifndef SPRITE_H
-#define SPRITE_h
+#define SPRITE_H
 
 #include <GL/glew.h>
 #include "texture.h"

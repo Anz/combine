@@ -1,6 +1,6 @@
 include Makefile.common
 
-COMBINE_SRC = array.c map.c texture.c texture_loader.c sprite.c scene.c level_loader.c render.c main.c
+COMBINE_SRC = array.c map.c texture.c texture_loader.c sprite.c scene.c level_loader.c render.c player.c main.c
 
 COMBINE = ${COMBINE_SRC:%.c=bin/%.o}
 

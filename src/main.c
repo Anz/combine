@@ -7,6 +7,7 @@
 #include "map.h"
 #include "texture_loader.h"
 #include "scene.h"
+#include "player.h"
 
 int main(int argc, char* argv[]) {
     printf("hello combine\n");
@@ -47,6 +48,10 @@ int main(int argc, char* argv[]) {
     hud.x = - 480.0f / 2.0f;
     hud.y = 360.0f / 2.0f;
 
+    // player
+    player_t player;
+    player_init(&player, &scene, textures, -50, 0);
+
     scene.space = array_add(scene.space, &crap);
     scene.space = array_add(scene.space, &draft);
     scene.space = array_add(scene.space, &frame);
@@ -66,7 +71,7 @@ int main(int argc, char* argv[]) {
         }
 
         if (running) {
-            render(&scene);
+            render(&scene, &player.camera);
             SDL_GL_SwapBuffers();
         }
         draft.rotation += 0.5f;
@@ -76,8 +81,8 @@ int main(int argc, char* argv[]) {
 
         counter += 0.05f;
         //scene.camera.x = sin(counter) * 20.0f;
-        scene.camera.x = counter * 10.0f;
-        scene.camera.y = cos(counter) * 20.0f;
+        player_move(&player, 1);
+        player.camera.y = cos(counter) * 20.0f;
         
         frame.frame = ceil((sin(counter) * 0.5f + 0.5f) * 25);
         //printf("frame: %i\n", frame.frame);
