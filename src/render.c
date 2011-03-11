@@ -46,10 +46,26 @@ void render(scene_t* scene) {
         glPopMatrix();
         glPushMatrix();
         sprite_t* sprite = scene->space[i];
+        texture_t* texture = sprite->texture;
+
+        glMatrixMode(GL_TEXTURE);
+        glLoadIdentity();
+        int frame_per_line = texture->width / sprite->width;
+        GLfloat twfactor = 1.0f / texture->width;
+        GLfloat thfactor = 1.0f / texture->height;
+        GLfloat texx = (sprite->width * (((sprite->frame - 1) % frame_per_line))) * twfactor;
+        GLfloat texy = (texture->height - sprite->height * ((sprite->frame - 1) / frame_per_line + 1)) * thfactor;
+        glTranslatef(texx, texy, 0.0f);
+
+
+        printf("frame %i/%i (%.3f, %.3f)\n", sprite->frame, frame_per_line, texx, texy);
 
         // translate
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
         glTranslatef(sprite->x - scene->camera.x, sprite->y - scene->camera.y, sprite->layer - 100);
         glRotatef(sprite->rotation, 0.0f, 0.0f, -1.0f);
+
 
         // draw
         glColor4f(1.0f, 1.0f, 1.0f, sprite->transparency);
@@ -72,7 +88,11 @@ void render(scene_t* scene) {
         glPushMatrix();
         sprite_t* sprite = scene->hud[i];
 
+        glMatrixMode(GL_TEXTURE);
+        glLoadIdentity();
+
         // translate
+        glMatrixMode(GL_MODELVIEW);
         glTranslatef(sprite->x, sprite->y, sprite->layer -100);
         glRotatef(sprite->rotation, 0.0f, 0.0f, -1.0f);
 

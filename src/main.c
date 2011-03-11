@@ -34,6 +34,10 @@ int main(int argc, char* argv[]) {
     sprite_init(&draft, map_get(textures, "draft"));
     draft.layer = 60;
 
+    sprite_t frame;
+    sprite_ani_init(&frame, 50, 50, map_get(textures, "frame"));
+    frame.layer = 80;
+
     sprite_t crap;
     sprite_init(&crap, map_get(textures, "crap"));
     crap.layer = 50;
@@ -45,6 +49,7 @@ int main(int argc, char* argv[]) {
 
     scene.space = array_add(scene.space, &crap);
     scene.space = array_add(scene.space, &draft);
+    scene.space = array_add(scene.space, &frame);
 
     scene.hud = array_add(scene.hud, &hud);
 
@@ -73,6 +78,9 @@ int main(int argc, char* argv[]) {
         //scene.camera.x = sin(counter) * 20.0f;
         scene.camera.x = counter * 10.0f;
         scene.camera.y = cos(counter) * 20.0f;
+        
+        frame.frame = ceil((sin(counter) * 0.5f + 0.5f) * 25);
+        //printf("frame: %i\n", frame.frame);
     }
 
     // clean up

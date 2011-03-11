@@ -7,6 +7,9 @@
 typedef struct sprite {
     GLfloat x;
     GLfloat y;
+    GLfloat width;
+    GLfloat height;
+    int frame;
     GLfloat rotation;
     GLfloat layer;
     GLfloat transparency;
@@ -16,6 +19,7 @@ typedef struct sprite {
 } sprite_t;
 
 void sprite_init(sprite_t* sprite, texture_t* texture);
+void sprite_ani_init(sprite_t* sprite, int width, int height, texture_t* texture);
 void sprite_release(sprite_t* sprite);
 
 #endif

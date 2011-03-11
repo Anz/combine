@@ -1,19 +1,28 @@
 #include "sprite.h"
 
-
 void sprite_init(sprite_t* sprite, texture_t* texture) {
+    sprite_ani_init(sprite, texture->width, texture->height, texture);
+}
+
+void sprite_ani_init(sprite_t* sprite, int width, int height, texture_t* texture) {
     sprite->x = 0.0f;
     sprite->y = 0.0f;
+    sprite->width = width;
+    sprite->height = width;
+    sprite->frame = 1;
     sprite->rotation = 0.0f;
     sprite->layer = 1.0f;
     sprite->transparency = 1.0f;
     sprite->texture = texture;
 
+    GLfloat texw = 1.0f / texture->width * width;
+    GLfloat texh = 1.0f / texture->height * height;
+
     GLfloat vertices_data[] = {
-        -0.5f * texture->width, -0.5f * texture->height, 0.0f, 0.0f, 0.0f,
-         0.5f * texture->width, -0.5f * texture->height, 0.0f, 1.0f, 0.0f,
-         0.5f * texture->width,  0.5f * texture->height, 0.0f, 1.0f, 1.0f,
-        -0.5f * texture->width,  0.5f * texture->height, 0.0f, 0.0f, 1.0f
+        -0.5f * width, -0.5f * height, 0.0f, 0.0f, 0.0f,
+         0.5f * width, -0.5f * height, 0.0f, texw, 0.0f,
+         0.5f * width,  0.5f * height, 0.0f, texw, texh,
+        -0.5f * width,  0.5f * height, 0.0f, 0.0f, texh
     };
 
     GLuint indices_data[] = {
@@ -36,3 +45,5 @@ void sprite_release(sprite_t* sprite) {
     glDeleteBuffers(1, &sprite->vertices);
     glDeleteBuffers(1, &sprite->indices);
 }
+
+
