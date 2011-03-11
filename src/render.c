@@ -7,6 +7,10 @@ bool compare_layer(void* a, void* b) {
     sprite_t* sa = a;
     sprite_t* sb = b;
 
+    if (sa->layer == sb->layer) {
+        return sa->vertices < sb->vertices;
+    }
+
     return sa->layer > sb->layer;
 }
 
