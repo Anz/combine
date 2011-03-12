@@ -58,13 +58,25 @@ int main(int argc, char* argv[]) {
 
     float counter = 0;
 
+    int speed = 0;
+
     // main
     while (running) {
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
                 case SDL_QUIT: running = false; break;
+                case SDL_KEYUP:
+                case SDL_KEYDOWN: {
+                    switch(event.key.keysym.sym) {
+                        case SDLK_a: { if (speed == -1) { speed = 0; } else { speed = -1; }  break; }
+                        case SDLK_d: { if (speed == 1) { speed = 0; } else { speed = 1; } break; }
+                        default: break;
+                    }
+                }
             }
         }
+
+        player_move(&player, speed * 2);
 
         if (running) {
             render(&scene, &player.camera);
@@ -74,7 +86,6 @@ int main(int argc, char* argv[]) {
         draft.transparency = sin(counter) / 2.0f + 0.5f;
 
         counter += 0.05f;
-        player_move(&player, 1);
         
         frame.frame = ceil((sin(counter) * 0.5f + 0.5f) * 25);
     }
