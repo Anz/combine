@@ -36,10 +36,6 @@ int main(int argc, char* argv[]) {
     sprite_init(&draft, map_get(textures, "draft"));
     draft.layer = 60;
 
-    sprite_t frame;
-    sprite_ani_init(&frame, 50, 50, map_get(textures, "frame"));
-    frame.layer = 80;
-
     sprite_t hud;
     sprite_init(&hud, map_get(textures, "draft"));
     hud.x = (hud.texture->width - width) / 2.0f;
@@ -50,7 +46,6 @@ int main(int argc, char* argv[]) {
     player_init(&player, &scene, textures, -50, -40);
 
     scene.space = array_add(scene.space, &draft);
-    scene.space = array_add(scene.space, &frame);
 
     scene.hud = array_add(scene.hud, &hud);
 
@@ -86,8 +81,6 @@ int main(int argc, char* argv[]) {
         draft.transparency = sin(counter) / 2.0f + 0.5f;
 
         counter += 0.05f;
-        
-        frame.frame = ceil((sin(counter) * 0.5f + 0.5f) * 25);
     }
 
     // clean up

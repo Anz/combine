@@ -10,6 +10,9 @@
 static void* generate_level_elements();
 static void add_default(scene_t* scene, void* textures, char* name, int x, int y, int layer);
 static void add_draft(scene_t* scene, void* textures, int x, int y, int layer);
+static void add_cave_entrance(scene_t* scene, void* textures, int x, int y, int layer);
+static void add_cave_lamp(scene_t* scene, void* textures, int x, int y, int layer);
+static void add_cave_end(scene_t* scene, void* textures, int x, int y, int layer);
 
 void level_load(scene_t* scene, void* textures, char* path) {
     FILE* level = fopen(path, "r");
@@ -49,6 +52,9 @@ void level_load(scene_t* scene, void* textures, char* path) {
 static void* generate_level_elements() {
     void* map = map_init();
     map = map_set(map, "draft", &add_draft);
+    map = map_set(map, "cave_entrance", &add_cave_entrance);
+    map = map_set(map, "cave_lamp", &add_cave_lamp);
+    map = map_set(map, "cave_end", &add_cave_end);
     return map;
 }
 
@@ -71,4 +77,34 @@ static void add_draft(scene_t* scene, void* textures, int x, int y, int layer) {
     draft->layer = layer;
 
     scene->space = array_add(scene->space, draft);
+}
+
+static void add_cave_entrance(scene_t* scene, void* textures, int x, int y, int layer) {
+    sprite_t* sprite = malloc(sizeof(sprite_t));
+    sprite_ani_init(sprite, 320, 240, map_get(textures, "cave"));
+    sprite->x = x;
+    sprite->y = y;
+    sprite->layer = layer;
+    sprite->frame = 1;
+    scene->space = array_add(scene->space, sprite);
+}
+
+static void add_cave_lamp(scene_t* scene, void* textures, int x, int y, int layer) {
+    sprite_t* sprite = malloc(sizeof(sprite_t));
+    sprite_ani_init(sprite, 320, 240, map_get(textures, "cave"));
+    sprite->x = x;
+    sprite->y = y;
+    sprite->layer = layer;
+    sprite->frame = 3;
+    scene->space = array_add(scene->space, sprite);
+}
+
+static void add_cave_end(scene_t* scene, void* textures, int x, int y, int layer) {
+    sprite_t* sprite = malloc(sizeof(sprite_t));
+    sprite_ani_init(sprite, 320, 240, map_get(textures, "cave"));
+    sprite->x = x;
+    sprite->y = y;
+    sprite->layer = layer;
+    sprite->frame = 2;
+    scene->space = array_add(scene->space, sprite);
 }
