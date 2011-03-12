@@ -8,8 +8,7 @@ void player_init(player_t* player, scene_t* scene, void* textures, int x, int y)
     player->sprite.layer = 60;
     player->sprite.x = x;
     player->sprite.y = y;
-    player->camera.x = x;
-    player->camera.y = 0;
+    camera_init(&player->camera, x, 0, 480, 360);
 
     scene->space = array_add(scene->space, &player->sprite);
 }

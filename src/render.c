@@ -35,8 +35,8 @@ void render_init() {
 
 void render(scene_t* scene, camera_t* camera) {
     glClear(GL_COLOR_BUFFER_BIT);
-    GLint width = 480 / 2;
-    GLint height = 360 / 2;
+    GLint width = camera->width / 2;
+    GLint height = camera->height / 2;
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-width, width, -height, height, 0,100);
