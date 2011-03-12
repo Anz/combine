@@ -30,13 +30,13 @@ void render_init() {
     glClientActiveTexture(GL_TEXTURE0);
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 void render(scene_t* scene, camera_t* camera) {
     glClear(GL_COLOR_BUFFER_BIT);
-    GLint width = 640 / 2;
-    GLint height = 480 / 2;
+    GLint width = 480 / 2;
+    GLint height = 360 / 2;
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(-width, width, -height, height, 0,100);

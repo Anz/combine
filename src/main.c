@@ -17,9 +17,10 @@ int main(int argc, char* argv[]) {
     bool running = true;
 
     // create window
+    int width =  480, height = 360;
     SDL_Init(SDL_INIT_VIDEO);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    window = SDL_SetVideoMode(480, 360, 24, SDL_OPENGL | SDL_GL_DOUBLEBUFFER);
+    window = SDL_SetVideoMode(width, height, 24, SDL_OPENGL | SDL_GL_DOUBLEBUFFER);
 
     // init render
     render_init();
@@ -39,20 +40,15 @@ int main(int argc, char* argv[]) {
     sprite_ani_init(&frame, 50, 50, map_get(textures, "frame"));
     frame.layer = 80;
 
-    sprite_t crap;
-    sprite_init(&crap, map_get(textures, "crap"));
-    crap.layer = 50;
-
     sprite_t hud;
     sprite_init(&hud, map_get(textures, "draft"));
-    hud.x = - 480.0f / 2.0f;
-    hud.y = 360.0f / 2.0f;
+    hud.x = (hud.texture->width - width) / 2.0f;
+    hud.y = (height - hud.texture->height) / 2.0f;
 
     // player
     player_t player;
-    player_init(&player, &scene, textures, -50, 0);
+    player_init(&player, &scene, textures, -50, -40);
 
-    scene.space = array_add(scene.space, &crap);
     scene.space = array_add(scene.space, &draft);
     scene.space = array_add(scene.space, &frame);
 
@@ -76,16 +72,11 @@ int main(int argc, char* argv[]) {
         }
         draft.rotation += 0.5f;
         draft.transparency = sin(counter) / 2.0f + 0.5f;
-        crap.x += 0.5f;
-        crap.layer = (sin(counter) * 0.5f + 0.5f) * 65.0f;
 
         counter += 0.05f;
-        //scene.camera.x = sin(counter) * 20.0f;
         player_move(&player, 1);
-        player.camera.y = cos(counter) * 20.0f;
         
         frame.frame = ceil((sin(counter) * 0.5f + 0.5f) * 25);
-        //printf("frame: %i\n", frame.frame);
     }
 
     // clean up
