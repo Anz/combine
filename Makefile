@@ -1,19 +1,23 @@
 include Makefile.common
 
-COMBINE_SRC = array.c map.c texture.c texture_loader.c sprite.c camera.c scene.c level_loader.c render.c player.c main.c
+COMBINE_SRC = array.c map.c texture.c sprite.c camera.c scene.c render.c
 
 COMBINE = ${COMBINE_SRC:%.c=bin/%.o}
 
-all: bin bin/combine
+all: bin bin/libcombine.a
 
 bin:
 	mkdir -p bin
 
-bin/combine: ${COMBINE}
-	${CC} ${CFLAGS} -obin/combine ${COMBINE} -lGLEW -lIL -lSDL
+bin/libcombine.a: ${COMBINE}
+	ar -rcs bin/libcombine.a ${COMBINE}
 
 bin/%.o: src/%.c
 	${CC} ${CFLAGS} -o${<:src/%.c=bin/%.o} -c $<
+
+install:
+	cp bin/libcombine.a /usr/lib/
+	cp -r include /usr/include/combine
 
 clean:
 	rm -rf bin
