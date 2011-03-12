@@ -17,7 +17,12 @@ bin/%.o: src/%.c
 
 install:
 	cp bin/libcombine.a /usr/lib/
-	cp -r include /usr/include/combine
+	mkdir -p /usr/include/combine
+	cp -r include/* /usr/include/combine/
+
+uninstall:
+	rm /usr/lib/libcombine.a
+	rm -r /usr/include/combine
 
 clean:
 	rm -rf bin
