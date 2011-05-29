@@ -3,7 +3,6 @@
 
 #include "array.h"
 #include "camera.h"
-#include "combine.h"
 #include "map.h"
 #include "render.h"
 #include "scene.h"
