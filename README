@@ -1,0 +1,28 @@
+DESCRIPTION
+
+    Combine is a simple 2D OpenGL graphic engine library for games.
+
+
+DEPENDENCIES
+
+    This engine requires following libraries:
+
+    - OpenGL
+    - GLEW
+    - devIL
+
+INSTALL
+
+    To install the software execute the following commands in a shell
+
+    $ make
+    $ sudo make install
+
+    Building the samples can done with:
+
+    $ make samples
+
+
+LICENSE
+
+    All files are available under the terms of the Apache License 2.0
