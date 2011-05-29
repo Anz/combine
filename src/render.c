@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include "render.h"
 #include <GL/glew.h>
 #include <IL/il.h>
@@ -15,25 +16,31 @@ bool compare_layer(void* a, void* b) {
 }
 
 void render_init() {
-    // glew
-    glewInit();
+    static bool init = false;
+    if (init == false) {
+        // glew
+        glewInit();
 
-    // devIL
-    ilInit();
-    ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
-    ilEnable(IL_ORIGIN_SET);
+        // devIL
+        ilInit();
+        ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+        ilEnable(IL_ORIGIN_SET);
 
-    // opengl setting
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glClientActiveTexture(GL_TEXTURE0);
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        // opengl setting
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
+        glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glClientActiveTexture(GL_TEXTURE0);
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+        init = true;
+    }
 }
 
 void render(scene_t* scene, camera_t* camera) {
+    render_init();
     glClear(GL_COLOR_BUFFER_BIT);
     GLint width = camera->width / 2;
     GLint height = camera->height / 2;

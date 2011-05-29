@@ -1,7 +1,9 @@
 #include "texture.h"
+#include "render.h"
 #include "IL/il.h"
 
 void texture_load(texture_t* texture, char* path) {
+    render_init();
     ILuint texid;
     ilGenImages(1, &texid);
     ilBindImage(texid);
