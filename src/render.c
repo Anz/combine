@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include <stdbool.h>
 #include "render.h"
 #include <GL/glew.h>
@@ -19,7 +21,11 @@ void render_init() {
     static bool init = false;
     if (init == false) {
         // glew
-        glewInit();
+        GLenum glew_result = glewInit();
+        if (glew_result != GLEW_OK) {
+            fprintf(stderr, "engine init error (glew): %s\n", glewGetErrorString(glew_result));
+            exit(0);
+        }
 
         // devIL
         ilInit();
