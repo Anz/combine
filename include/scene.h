@@ -10,5 +10,7 @@ typedef struct scene {
 
 void scene_init(scene_t* scene);
 void scene_release(scene_t* scene);
+void scene_space_add(scene_t* scene, sprite_t* sprite);
+void scene_hud_add(scene_t* scene, sprite_t* sprite);
 
 #endif

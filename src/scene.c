@@ -10,3 +10,11 @@ void scene_release(scene_t* scene) {
     array_release(scene->space);
     array_release(scene->hud);
 }
+
+void scene_space_add(scene_t* scene, sprite_t* sprite) {
+    scene->space = array_add(scene->space, sprite);
+}
+
+void scene_hud_add(scene_t* scene, sprite_t* sprite) {
+    scene->hud = array_add(scene->hud, sprite);
+}
